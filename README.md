@@ -74,7 +74,7 @@
             });
     
     
-| device api|  说明
+| device API|  说明
 | :-----  | :----:  |
 | setAngle(int angle)|  设置高度角   |
 |   setInterval(int interval)|   设置传输间隔   |
