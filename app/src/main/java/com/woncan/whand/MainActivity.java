@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         WHandManager.getInstance().init(BuildConfig.DEBUG);
 
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-
         WHandManager.getInstance().startScan(new ScanCallback() {
 
             @Override
@@ -55,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 WHandManager.getInstance().stopScan();
                 IDevice device = WHandManager.getInstance().connect(MainActivity.this, bluetoothDevice);
                 device.setOnConnectionStateChangeListener((status, newStatus) -> {
-                    Log.i("TAG", "onConnectionStateChange: "+newStatus);
+                    Log.i("TAG", "onConnectionStateChange: " + newStatus);
                     switch (newStatus) {//newState顾名思义，表示当前最新状态。status可以获取之前的状态。
                         case BluetoothProfile.STATE_CONNECTED:
                             //这里表示已经成功连接，如果成功连接，我们就会执行discoverServices()方法去发现设备所包含的服务
+                            //设置数据传输间隔
                             device.setInterval(1000);
+                            //设置激光开关
+                            device.showLaser(false);
                             break;
                         case BluetoothProfile.STATE_DISCONNECTED:
                             //表示gatt连接已经断开。
