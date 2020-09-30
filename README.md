@@ -107,4 +107,5 @@ Gradle集成SDK
 |   getAccount()   |  获取账号|
 |   setAccount(String account,String password)  |  设置账号
 |   reStartSocket()  |  重启socket|
+|showLaser(boolean isShow)|设置激光开关|
 	
