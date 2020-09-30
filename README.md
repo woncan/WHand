@@ -1,9 +1,12 @@
 # WHand 项目配置
-##导入
-###1.aar导入
+
+下面2种方式任选其一
+aar导入
+
 [下载aar](http://survey-file.woncan.cn/firmware/20200930-115634/whand-release.aar)
 将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
-###2.通过Gradle集成SDK
+
+Gradle集成SDK
 #####1、在Project的build.gradle文件中配置repositories，添加maven或jcenter仓库地址
 
 	allprojects {
@@ -36,15 +39,15 @@
 
 	WHandManager.getInstance().startScan(new ScanCallback() {
 
-    	@Override
-        public void onError(int errorCode, String message) {
-                 //返回错误码 和 错误信息
-	    }
+		@Override
+		public void onError(int errorCode, String message) {
+			 //返回错误码 和 错误信息
+		}
 
-    	@Override
-        public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
-               //扫描到蓝牙就会回调(可能一个设备会被发现多次，需要去重)
-    	}
+		@Override
+		public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+			//扫描到蓝牙就会回调(可能一个设备会被发现多次，需要去重)
+		}
 	});
 
 扫描会默认在Options.scanPeriod (毫秒)后停止，也可以手动停止
