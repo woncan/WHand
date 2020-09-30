@@ -1,23 +1,21 @@
 package com.woncan.whand;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.woncan.whand.device.IDevice;
 import com.woncan.whand.listener.OnConnectListener;
-import com.woncan.whand.listener.OnConnectionStateChangeListener;
 import com.woncan.whand.scan.ScanCallback;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,19 +54,16 @@ public class MainActivity extends AppCompatActivity {
 
                 WHandManager.getInstance().stopScan();
                 IDevice device = WHandManager.getInstance().connect(MainActivity.this, bluetoothDevice);
-                device.setOnConnectionStateChangeListener(new OnConnectionStateChangeListener() {
-                    @Override
-                    public void onConnectionStateChange(int status, int newStatus) {
-                        Log.i("TAG", "onConnectionStateChange: "+newStatus);
-                        switch (newStatus) {//newState顾名思义，表示当前最新状态。status可以获取之前的状态。
-                            case BluetoothProfile.STATE_CONNECTED:
-                                //这里表示已经成功连接，如果成功连接，我们就会执行discoverServices()方法去发现设备所包含的服务
-                                device.setInterval(1000);
-                                break;
-                            case BluetoothProfile.STATE_DISCONNECTED:
-                                //表示gatt连接已经断开。
-                                break;
-                        }
+                device.setOnConnectionStateChangeListener((status, newStatus) -> {
+                    Log.i("TAG", "onConnectionStateChange: "+newStatus);
+                    switch (newStatus) {//newState顾名思义，表示当前最新状态。status可以获取之前的状态。
+                        case BluetoothProfile.STATE_CONNECTED:
+                            //这里表示已经成功连接，如果成功连接，我们就会执行discoverServices()方法去发现设备所包含的服务
+                            device.setInterval(1000);
+                            break;
+                        case BluetoothProfile.STATE_DISCONNECTED:
+                            //表示gatt连接已经断开。
+                            break;
                     }
                 });
                 device.setOnConnectListener(new OnConnectListener() {
