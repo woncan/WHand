@@ -7,7 +7,7 @@ aar导入
 将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
 
 Gradle集成SDK
-#####1、在Project的build.gradle文件中配置repositories，添加maven或jcenter仓库地址
+在Project的build.gradle文件中配置repositories，添加maven或jcenter仓库地址
 
 	allprojects {
 		repositories {
@@ -15,7 +15,7 @@ Gradle集成SDK
 			maven { url "https://jitpack.io" }
 		}
 	}
-#####2、在主工程的build.gradle文件配置dependencies
+在主工程的build.gradle文件配置dependencies
 
 	android {
 		compileOptions {
