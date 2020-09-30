@@ -2,13 +2,7 @@
 
 下面2种方式任选其一
 
-aar导入
-
-[下载aar](http://survey-file.woncan.cn/firmware/20200930-151105/whand-release.aar)
-将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
-
-
-Gradle集成SDK
+方式一：Gradle集成SDK (推荐)
 
 在Project的build.gradle文件中配置repositories，添加maven或jcenter仓库地址
 
@@ -30,6 +24,25 @@ Gradle集成SDK
 	        implementation 'com.github.woncan:WHand:latest.release' //其中latest.release指代最新SDK版本号
 	}
 
+方式二：aar导入
+
+[下载aar](http://survey-file.woncan.cn/firmware/20200930-151105/whand-release.aar)
+将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
+
+构建aar编译路径
+
+	dependencies {
+		compile fileTree(dir: 'libs', include: ['*.jar'])
+		compile(name: 'bugly_crashreport_upgrade-1.2.0', ext: 'aar')
+		}
+
+	android {
+		repositories {
+			flatDir {
+				dirs 'libs'
+			}
+	}
+	
 
 # 使用方式
 初始化WHandManager
