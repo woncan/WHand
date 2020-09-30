@@ -32,8 +32,8 @@
 构建aar编译路径
 
 	dependencies {
-		compile fileTree(dir: 'libs', include: ['*.jar'])
-		compile(name: 'bugly_crashreport_upgrade-1.2.0', ext: 'aar')
+		implementation fileTree(dir: 'libs', include: ['*.jar'])
+		implementation(name: 'whand-release', ext: 'aar')
 		}
 
 	android {
