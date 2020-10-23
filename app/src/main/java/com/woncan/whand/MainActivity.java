@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         Options.scanPeriod = 10 * 1000;
         WHandManager.getInstance().init(BuildConfig.DEBUG);
 
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -53,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
 
                 WHandManager.getInstance().stopScan();
                 IDevice device = WHandManager.getInstance().connect(MainActivity.this, bluetoothDevice);
+
+                device.setNtripConfig("rtk.ntrip.qxwz.com",8003,"RTCM32_GGB","account","password");
+
+                device.setAccount("account","password");
+
                 device.setOnConnectionStateChangeListener((status, newStatus) -> {
                     Log.i("TAG", "onConnectionStateChange: " + newStatus);
                     switch (newStatus) {//newState顾名思义，表示当前最新状态。status可以获取之前的状态。
