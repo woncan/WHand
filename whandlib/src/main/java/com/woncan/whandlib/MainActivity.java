@@ -15,7 +15,4 @@ public class MainActivity extends AppCompatActivity {
         WHandManager.getInstance().init(BuildConfig.DEBUG);
     }
 
-    public static String test(){
-        return "success";
-    }
 }
