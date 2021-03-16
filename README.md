@@ -130,7 +130,8 @@
 | laserDistance|激光测距|  int|
 | accelerationLaser|激光精度|  int|
 | power| 电量|  int|
-解算精度  -1 没收到星  1单点  2码差分   5浮点    4固定
+
+备注:解算精度  -1 没收到星  1单点  2码差分   5浮点    4固定
 
 ### 更多设置
 
