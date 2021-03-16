@@ -110,7 +110,29 @@
 			}
 		});
 
-高级设置
+### WHandInfo
+| WHandInfo|    说明| 数据类型|
+| :-------- | :--------| :--: |
+| latitude   | 纬度     |  double|
+| longitude  | 经度     |  double|
+| altitude   | 高程     |  double|
+| altitudeErr| 高程异常值|  double|
+| gpsNum     | 卫星颗数|  int|
+| rtkType	 | 解算精度|  int|
+| accuracyFlat| 水平精度|  int|
+| accuracyAlt| 高程精度|  int|
+| accelerationX| X轴加速度|  long|
+| accelerationY| Y轴加速度|  long|
+| accelerationZ| Z轴加速度|  long|
+| spinX| X轴角速度|  long|
+| spinY| Y轴角速度|  long|
+| spinZ|Z轴角速度|  long|
+| laserDistance|激光测距|  int|
+| accelerationLaser|激光精度|  int|
+| power| 电量|  int|
+解算精度  -1 没收到星  1单点  2码差分   5浮点    4固定
+
+### 更多设置
 
 	//需要提前配置
 	//设置debug模式
