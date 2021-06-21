@@ -26,7 +26,7 @@
 
 方式二：aar导入
 
-[下载aar](http://survey-file.woncan.cn/firmware/20201023-142047/whand-release.aar)
+[下载aar](http://survey-file.woncan.cn/firmware/20210621-181848/whand-release.aar)
 将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
 
 构建aar编译路径
