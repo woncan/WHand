@@ -115,8 +115,8 @@
 | :-------- | :--------| :--: |
 | latitude   | 纬度     |  double|
 | longitude  | 经度     |  double|
-| altitude   | 高程     |  double|
-| altitudeErr| 高程异常值|  double|
+| altitude   |海拔高度|  double|
+| altitudeErr|大地水准面高度异常差值|  double|
 | gpsNum     | 卫星颗数|  int|
 | rtkType	 | 解算精度|  int|
 | accuracyFlat| 水平精度|  int|
@@ -132,6 +132,8 @@
 | power| 电量|  int|
 
 备注:解算精度  -1 没收到星  1单点  2码差分   5浮点    4固定
+
+	大地高=海拔高+大地水准面高度异常差值
 
 ### 更多设置
 
