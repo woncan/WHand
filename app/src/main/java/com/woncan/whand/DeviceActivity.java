@@ -65,6 +65,11 @@ public class DeviceActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onNMEAReceive(String nmea) {
+                Log.i("TAG", "onNMEAReceive: " + nmea);
+            }
+
+            @Override
             public void onAccountChanged(String name) {
                 showLog(name);
             }

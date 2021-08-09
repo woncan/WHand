@@ -103,6 +103,11 @@
 			public void onAccountChanged(String name) {
 			//设备内账号改变会调用
 			}
+            @Override
+            public void onNMEAReceive(String gngga) {
+            //新增
+            //返回GNGGA数据
+            }
 
 			@Override
 			public void onError(Exception e) {
