@@ -45,7 +45,7 @@ public class DeviceActivity extends AppCompatActivity {
                     //设置数据传输间隔
                     device.setInterval(1000);
                     //设置激光开关
-                    device.showLaser(false);
+                    device.showLaser(true);
                     break;
                 case BluetoothProfile.STATE_DISCONNECTED:
                     //表示gatt连接已经断开。
