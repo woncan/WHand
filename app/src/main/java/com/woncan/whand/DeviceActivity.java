@@ -1,18 +1,15 @@
 package com.woncan.whand;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.woncan.whand.databinding.ActivityDeviceBinding;
 import com.woncan.whand.device.IDevice;
@@ -53,6 +50,8 @@ public class DeviceActivity extends AppCompatActivity {
                     break;
             }
         });
+
+
         device.setOnConnectListener(new OnConnectListener() {
             @Override
             public void onDeviceChanged(WHandInfo wHandInfo) {
