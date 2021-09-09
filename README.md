@@ -2,11 +2,11 @@
 
 下面2种方式任选其一
 
-方式一：Gradle集成SDK (推荐)
+#### 方式一：Gradle集成SDK (推荐)
 
 在Project的build.gradle文件中配置repositories，添加maven或jcenter仓库地址
 
-	allprojects {
+    allprojects {
 		repositories {
 			...
 			maven { url "https://jitpack.io" }
@@ -24,7 +24,7 @@
 	        implementation 'com.github.woncan:WHand:latest.release' //其中latest.release指代最新SDK版本号
 	}
 
-方式二：aar导入
+#### 方式二：aar导入
 
 [下载aar](http://survey-file.woncan.cn/firmware/20210621-181848/whand-release.aar)
 将下载的aar包复制到工程的 libs 目录下，如果有老版本aar包在其中,请删除。
@@ -45,13 +45,13 @@
 
 
 # 使用方式
-初始化WHandManager
+#### 初始化WHandManager
 
 	WHandManager.getInstance().init(BuildConfig.DEBUG);
 参数为SDK日志开关，debug模式下会输出log
 
-开启扫描，发现蓝牙设备
-需要蓝牙权限和定位权限
+#### 发现BluetoothDevice
+扫描的方式获取BluetoothDevice，需要蓝牙权限和定位权限
 
 	WHandManager.getInstance().startScan(new ScanCallback() {
 
@@ -62,60 +62,74 @@
 
 		@Override
 		public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
-			//扫描到蓝牙就会回调(可能一个设备会被发现多次，需要去重)
+		    //BluetoothDevice device
+			//扫描到蓝牙就会回调(可能同个BluetoothDevice会被发现多次，需要去重)
 		}
 	});
 
-扫描会默认在Options.scanPeriod (毫秒)后停止，也可以手动停止
+    //扫描会默认在Options.scanPeriod (毫秒)后停止，也可以手动停止
+    WHandManager.getInstance().stopScan();
 
-	WHandManager.getInstance().stopScan();
+通过蓝牙Mac地址获取BluetoothDevice
 
-连接设备
+    BluetoothAdapter.getDefaultAdapter().getRemoteDevice(mac);
 
-	//连接扫描到的蓝牙设备
-	device = WHandManager.getInstance().connect(MainActivity.this, bluetoothDevice);
-	//直接设置账号密码时采用千寻差分
-	//ip:rtk.ntrip.qxwz.com     port:8003     mountPoint:RTCM32_GGB
-	device.setAccount("account","password");
-	//修改差分站调用
-	//device.setNtripConfig(ip,port,mountPoint,account,password);
-	//以上选取一种方式配置
+#### 连接BluetoothDevice
 
+	//连接BluetoothDevice
+	device = WHandManager.getInstance().connect(context, bluetoothDevice);
 	设置连接状态监听
-	device.setOnConnectionStateChangeListener(new OnConnectionStateChangeListener() {
-			@Override
-			public void onConnectionStateChange(int status, int newState) {
-			 //status表示之前的连接状态，newState现在的连接状态
-			 //全部有4种连接状态
-			 //BluetoothProfile.STATE_CONNECTED
-			 //BluetoothProfile.STATE_DISCONNECTED
-			 //BluetoothProfile.STATE_CONNECTING
-			 //BluetoothProfile.STATE_DISCONNECTING
-			}
-	});
-	设置返回数据监听
-	device.setOnConnectListener(new OnConnectListener() {
-			@Override
-			public void onDeviceChanged(WHandInfo wHandInfo) {
-			//返回设备信息 wHandInfo里面包含 位置信息 和 陀螺仪信息
-			}
-			@Override
-			public void onAccountChanged(String name) {
-			//设备内账号改变会调用
-			}
+    device.setOnConnectionStateChangeListener(new OnConnectionStateChangeListener() {
+    		@Override
+    		public void onConnectionStateChange(int status, int newState) {
+    			 //status表示之前的连接状态，newState现在的连接状态
+    			 //全部有4种连接状态
+    			 //BluetoothProfile.STATE_CONNECTED
+    			 //BluetoothProfile.STATE_DISCONNECTED
+    			 //BluetoothProfile.STATE_CONNECTING
+    			 //BluetoothProfile.STATE_DISCONNECTING
+    			}
+    	});
+    设置返回数据监听
+    device.setOnConnectListener(new OnConnectListener() {
+        	@Override
+        	public void onDeviceChanged(WHandInfo wHandInfo) {
+        	    //返回设备信息 wHandInfo里面包含 位置信息 和 陀螺仪信息
+        	}
+
+        	@Override
+        	public void onAccountChanged(String name) {
+        	}
+
             @Override
             public void onNMEAReceive(String gngga) {
-            //新增
-            //返回GNGGA数据
+                //新增
+                //返回GNGGA数据
             }
 
-			@Override
-			public void onError(Exception e) {
-			//连接出错时调用
-			}
-		});
+        	@Override
+        	public void onError(Exception e) {
+        	    //连接出错时回调
+        	}
+        });
+
+#### 配置差分账号
+下面2种方式任选其一
+
+**方式一：使用默认千寻差分**
+
+默认配置ip：rtk.ntrip.qxwz.com     port:8003      mountPoint:AUTO
+
+	device.setAccount("account","password");
+
+**方式一：使用自定义方式差分**
+
+	device.setNtripConfig(ip,port,mountPoint,account,password);
+
+
 
 ### WHandInfo
+
 | WHandInfo|    说明| 数据类型|
 | :-------- | :--------| :--: |
 | latitude   | 纬度     |  double|
