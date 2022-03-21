@@ -122,13 +122,13 @@
 
 	device.setAccount("account","password");
 
-**方式一：使用自定义方式差分**
+**方式二：使用自定义方式差分**
 
 	device.setNtripConfig(ip,port,mountPoint,account,password);
 
 
 
-### WHandInfo
+#### WHandInfo
 
 | WHandInfo|    说明| 数据类型|
 | :-------- | :--------| :--: |
@@ -154,7 +154,7 @@
 
 	大地高=海拔高+大地水准面高度异常差值
 
-### 更多设置
+#### 更多设置
 
 	//需要提前配置
 	//设置debug模式
