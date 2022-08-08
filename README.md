@@ -132,23 +132,21 @@
 
 | WHandInfo|    说明| 数据类型|
 | :-------- | :--------| :--: |
-| latitude   | 纬度     |  double|
-| longitude  | 经度     |  double|
-| altitude   |海拔高度|  double|
-| altitudeErr|大地水准面高度异常差值|  double|
+| latitude   | 纬度   （度）  |  double|
+| longitude  | 经度    （度） |  double|
+| altitude   |海拔高度（米）|  double|
+| altitudeErr|大地水准面高度异常差值（米）|  double|
 | gpsNum     | 卫星颗数|  int|
-| rtkType	 | 解算精度|  int|
-| accuracyFlat| 水平精度|  int|
-| accuracyAlt| 高程精度|  int|
+| accuracyFlat| 水平精度（毫米）|  int|
+| accuracyAlt| 高程精度（毫米）|  int|
 | accelerationX| X轴加速度|  long|
 | accelerationY| Y轴加速度|  long|
 | accelerationZ| Z轴加速度|  long|
 | spinX| X轴角速度|  long|
 | spinY| Y轴角速度|  long|
 | spinZ|Z轴角速度|  long|
-| laserDistance|激光测距|  int|
-| accelerationLaser|激光精度|  int|
 | power| 电量|  int|
+| rtkType	 | 解算精度|  int|
 
 备注:解算精度  -1 没收到星  1单点  2码差分   5浮点    4固定
 
@@ -164,14 +162,12 @@
 	//设置蓝牙扫描时长  默认10秒后关闭扫描
 	Options.scanPeriod = 10 * 1000;
 
-| device API|  说明
-| :-----  | :----:  |
-| setAngle(int angle)|  设置高度角   |
-|   setInterval(int interval)|   设置传输间隔   |
-|    disconnect()   |  断开连接  |
-|   getAccount()   |  获取账号|
-|   setAccount(String account,String password)  |  设置账号
-|   reStartSocket()  |  重启socket|
-|showLaser(boolean isShow)|设置激光开关|
-
-
+| device API|  说明|默认值
+| :-----  | :----:  | :--:  |
+| setAngle(int angle)|  设置高度角  (0°~90°) |0|
+|   setInterval(int interval)|   设置传输间隔   |200（0.2秒）|
+|    disconnect()   |  断开连接  ||
+|   getAccount()   |  获取账号|默认无账号|
+|   setAccount(String account,String password)  |  设置账号||
+|   reStartSocket()  |  重启socket||
+|showLaser(boolean isShow)|设置激光开关||
