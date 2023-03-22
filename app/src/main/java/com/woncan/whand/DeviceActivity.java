@@ -32,8 +32,8 @@ public class DeviceActivity extends AppCompatActivity {
         }
 
         IDevice device = WHandManager.getInstance().connect(this, bluetoothDevice);
-//        device.setNtripConfig("rtk.ntrip.qxwz.com", 8003, "RTCM32_GGB", "account", "password");
-        device.setAccount("account", "password");
+        device.setNtripConfig("sdk.pnt.10086.cn", 8003, "RTCM33_GRCE", "account", "password");
+//        device.setAccount("account", "password");
         device.setOnConnectionStateChangeListener((status, newStatus) -> {
             showLog(String.format(Locale.CHINA, "newStatus：%d   oldStatus：%d", newStatus, status));
             switch (newStatus) {//newState顾名思义，表示当前最新状态。status可以获取之前的状态。
